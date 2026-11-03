@@ -12,6 +12,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Transaction;
+use App\Models\RecurringTransaction;
+ 
+
+ 
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -27,6 +32,11 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+    public function budgets(): HasMany
+{
+    return $this->hasMany(Budget::class);
+}
     protected function casts(): array
     {
         return [
@@ -37,5 +47,9 @@ class User extends Authenticatable
     public function transactions(): HasMany
 {
     return $this->hasMany(Transaction::class);
+}
+public function recurringTransactions(): HasMany
+{
+    return $this->hasMany(RecurringTransaction::class);
 }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\RecurringTransaction;
 
 class Transaction extends Model
 {
@@ -13,6 +14,7 @@ class Transaction extends Model
         'category',
         'transaction_date',
         'description',
+        'recurring_transaction_id',
     ];
 
     protected function casts(): array
@@ -27,4 +29,8 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function recurringTransaction(): BelongsTo
+{
+    return $this->belongsTo(RecurringTransaction::class);
+}
 }
